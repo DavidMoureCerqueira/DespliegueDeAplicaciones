@@ -44,7 +44,7 @@ git rm --> usa el modificador --cached para referirse a la staged area
 git restore --> usa el modificador --staged ara referirse a la staged area
 git diff --> usa el modificador --cached o --staged ara referirse a la staged area
 
-Hacer esquema de la pagina 1 del pdf que tiene 8 que explica como mueve los estados
+# Hacer esquema de la pagina 1 del pdf que tiene 8 que explica como mueve los estados
 
 rama master es donde se guarda cuando hacemos un commit
 rama origin/master es el repositorio remoto
@@ -55,3 +55,23 @@ Usando git status -s
 La M verde en el primer espacio es modified en staged
 La M rojo en el segundo espacio es modified en el workspace
 La MM(verde y roja) quiere decir que hay un cambio en staged listo para subir y que otro cambio esta en el workspace
+
+# Borrado de commits
+
+Cuando se borra un commit simplemente accedemos al commit anterior
+
+git reset --hard hash --> Vuelve al commit anterior borrando todos los posteriores pero modificando el área de trabajo al dejar ahi los ficheros del commit y vacia el staged area
+
+git reset --soft hash --> Vuelve al commit anterior borrando todos los posteriores pero no modifica el área de trabajo y no modifica el staged area
+
+git reset --mixed hash --> Vuelve al commit anterior borrando todos los posteriores pero no modifica el área de trabajo y vacia el staged area
+
+git reset --soft HEAD-1 --> Vuelve al penultimo commit sin modificar staged ni el area de trabajo
+
+Una vez subido un commit a GitHub es mala practica borrar un commit pero en caso de hacer algo se puede usar __git revert HEAD-1__ --> Crea un commit que revierte los ultimos cambios, el anterior commit sigue existiendo pero no se borra, simplemente es un commit que deshace ese trabajo.
+
+La opcion --no commit en un git revert --no-commit HEAD-1 nos permite ver que cambia, para decidir que hacer.
+
+Si no estamos de acuerdo podemos usar git restore --worktree --staged fichero
+
+En caso de conflicto se soluciona en el fichero
